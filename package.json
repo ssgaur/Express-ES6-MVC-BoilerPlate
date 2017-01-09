@@ -4,7 +4,7 @@
   "description": "A basic boilerplate of express version 4 with ES6 setup along with babel and gulp",
   "main": "index.js",
   "scripts": {
-    "start" : "node ./app/index.js",
+    "start": "node ./app/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Shailendra Singh <shailendra.singh.knp@gmail.com>",
@@ -15,6 +15,7 @@
     "babel-preset-es2015-node5": "^1.2.0",
     "babel-preset-stage-0": "^6.16.0",
     "gulp": "^3.9.1",
+    "gulp-cli": "^1.2.2",
     "gulp-live-server": "0.0.30",
     "gulp-shell": "^0.5.2",
     "gulp-watch": "^4.3.11",
