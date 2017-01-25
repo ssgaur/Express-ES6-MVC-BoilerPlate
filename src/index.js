@@ -17,10 +17,20 @@ let middleware = new Middleware(app, express);
 let routes = new RouteMapper();
 routes.mapControllers(app);
 
+/**
+* Default Routes
+********************* */
 app.use((req, res, next) => {
   res.status(404);
   res.render('global/404', {
     title: 'Page introuvable !',
+  });
+});
+
+app.use((req, res, next) => {
+  res.status(500);
+  res.render('global/500', {
+    title: 'Internal Server Error !',
   });
 });
 

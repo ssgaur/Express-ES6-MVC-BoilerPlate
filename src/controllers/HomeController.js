@@ -1,16 +1,16 @@
 import {BaseController} from './../core/BaseController';
 
-export default class HomeController{
+export default class HomeController extends BaseController{
     
-    constructor(router) {
-        //super(basePath);
+    constructor(router, basePath) {
+        super(basePath);
         this.router = router;
         this.registerRoutes();
     }
 
     registerRoutes() {
         this.router.get('/', this.getHome.bind(this));
-        this.router.get('/lol', this.getLol.bind(this));
+        this.router.post('/lol', this.getLol.bind(this));
     }
 
     getHome = (req, res) => {
@@ -18,6 +18,7 @@ export default class HomeController{
     }
 
     getLol = (req, res) => {
-        res.send({"players": "booooooom"});
+        let newData = {"lol":"moom","poo":"wer"};
+        this.renderView(res, "register", newData);
     }
 }

@@ -13,9 +13,9 @@ class RouteMapper {
 		        let basePath = path.basename(file, ".js");
 		        let MyController = require(path.join(__dirname, '../../app/controllers/')+basePath).default;
 		        let newRouter = express.Router();
-		        let urlPath = '/'+basePath.toString().slice(0,-10).toLowerCase();
-		        app.use(urlPath, newRouter);
-		        let controller = new  MyController(newRouter);
+		        let urlPath = basePath.toString().slice(0,-10).toLowerCase();
+		        app.use("/"+urlPath, newRouter);
+		        let controller = new  MyController(newRouter, urlPath);
 		    }
 		});
 	}
