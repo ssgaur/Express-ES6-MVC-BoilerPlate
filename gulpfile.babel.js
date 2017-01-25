@@ -6,7 +6,7 @@ import watch from 'gulp-watch'
 import server from 'gulp-live-server'
 
 const paths = {
-	js: 			['./src/**/*.js'],
+	js: 			['./src/**/*.*'],
 	destination: 	'./app'
 };
 
@@ -27,15 +27,16 @@ gulp.task('flow', shell.task([
 	],{ ignoreErrors: true })
 );
 
-gulp.task('babel', clearshell.task([
-	'babel src --out-dir app'
+gulp.task('babel', shell.task([
+	'babel src --out-dir app',
+	'cp -R src/views app/views' 
 	])
 );
 
 let express;
 
 gulp.task('server', () => {
-	express = server.new(paths.destination+'/index.js');
+	express = server.new(paths.destination);
 });
 
 gulp.task('restart', () => {
