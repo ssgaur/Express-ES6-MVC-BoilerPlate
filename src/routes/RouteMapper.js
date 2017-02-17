@@ -8,14 +8,15 @@ class RouteMapper {
 	}
 
 	mapControllers = (app) => {
+		let basePath, Controller, router, urlPath, bindControllerRoutes;
 		fs.readdirSync(path.join(__dirname, '../../app/controllers')).forEach(function (file) {
 		    if (file.substr(-3) === ".js") {
-		        let basePath = path.basename(file, ".js");
-		        let MyController = require(path.join(__dirname, '../../app/controllers/')+basePath).default;
-		        let newRouter = express.Router();
-		        let urlPath = basePath.toString().slice(0,-10).toLowerCase();
-		        app.use("/"+urlPath, newRouter);
-		        let controller = new  MyController(newRouter, urlPath);
+		        basePath = path.basename(file, ".js");
+		        Controller = require(path.join(__dirname, '../../app/controllers/')+basePath).default;
+		        router = express.Router();
+		        urlPath = basePath.toString().slice(0,-10).toLowerCase();
+		        app.use("/"+urlPath, router);
+		        bindControllerRoutes = new  Controller(router, urlPath);
 		    }
 		});
 	}
