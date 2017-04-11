@@ -5,42 +5,42 @@ import session from 'express-session';
 import compression from 'compression';
 
 class Middleware {
-  constructor(app, express) {
-    this.app = app;
-    this.express = express;
+    constructor(app, express) {
+      this.app = app;
+      this.express = express;
 
-    this.useMiddleware();
-  }
-
-  useMiddleware = () => {
-    if (global.PROD_ENV) {
-      this.app.use(compression());
+      this.useMiddleware();
     }
 
-    /*
-    * Parse JSON
-    * app.use(bodyParser.json());
-    **/
+    useMiddleware = () => {
+      if (global.PROD_ENV) {
+        this.app.use(compression());
+      }
 
-    this.app.use(bodyParser.urlencoded({
-      extended: true,
-    }));
+      /*
+      * Parse JSON
+      * app.use(bodyParser.json());
+      **/
 
-    /*
-    * Use PUT / DELETE HTTP verb
-    * app.use(methodOverride());
-    **/
+      this.app.use(bodyParser.urlencoded({
+        extended: true,
+      }));
 
-    this.app.use(session({
-      secret: 'sUperS3cr3t',
-      saveUninitialized: true,
-      resave: true,
-    }));
+      /*
+      * Use PUT / DELETE HTTP verb
+      * app.use(methodOverride());
+      **/
 
-    this.app.set('views', path.join(__dirname, '../views'));
-    this.app.set('view engine', 'ejs');
-    this.app.use(this.express.static(path.join(__dirname, '../assets')));
-  }
+      this.app.use(session({
+        secret: 'sUperS3cr3t',
+        saveUninitialized: true,
+        resave: true,
+      }));
+
+      this.app.set('views', path.join(__dirname, '../views'));
+      this.app.set('view engine', 'ejs');
+      this.app.use(this.express.static(path.join(__dirname, '../assets')));
+    }
 }
 
 export default Middleware;
